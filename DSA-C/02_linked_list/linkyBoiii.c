@@ -15,6 +15,117 @@ Node *createNode(int e)
     return n;
 }
 
+void insertAtEnd(Node *head, int e);
+void insertAtBeginning(Node **head, int e);
+void insertAtMiddle(Node *head, int e, int pos);
+
+void removeFirstNode(Node **head);
+void removeAtMiddle(Node *head, int pos);
+void removeLastNode(Node *head);
+
+/*
+TO BE IMPLEMENTED SOON
+void search();
+void length();
+void reverse();
+*/
+
+void display(Node *head);
+
+int main()
+{
+
+    int choice;
+    Node *head = NULL;
+
+    printf("1.Insert at end\n");
+    printf("2.Insert at beginning\n");
+    printf("3.Insert at middle\n");
+
+    printf("4.Remove first node\n");
+    printf("5.Remove at middle\n");
+    printf("6.Remove last node\n");
+    printf("Select operation you want to perform: \n");
+
+    scanf("%d", &choice);
+
+    switch (choice)
+    {
+    case 1:
+    {
+        printf("Enter element: ");
+        int element;
+
+        scanf("%d", &element);
+
+        if (head == NULL)
+        {
+            head = createNode(element);
+        }
+        else
+        {
+            insertAtEnd(head, element);
+        }
+        break;
+    }
+
+    case 2:
+    {
+        printf("Enter element: ");
+        int element;
+        scanf("%d", &element);
+
+        if (head == NULL)
+        {
+            head = createNode(element);
+        }
+        else
+        {
+            insertAtBeginning(&head, element);
+        }
+        break;
+    }
+    case 3:
+    {
+        printf("Enter element: ");
+        int element;
+        scanf("%d", &element);
+
+        break;
+    }
+    case 4:
+    {
+        break;
+    }
+    case 5:
+    {
+        break;
+    }
+    case 6:
+    {
+        break;
+    }
+    case 7:
+    {
+        break;
+    }
+    case 8:
+    {
+        break;
+    }
+    case 9:
+    {
+        break;
+    }
+    default:
+    {
+        break;
+    }
+    }
+
+    return 0;
+}
+
 void insertAtEnd(Node *head, int e)
 {
 
@@ -36,7 +147,8 @@ void insertAtMiddle(Node *head, int e, int pos)
 
     Node *temp = head;
 
-    for(int i = 0; i < pos-1 && temp->next != NULL;i++){
+    for (int i = 0; i < pos - 1 && temp->next != NULL; i++)
+    {
         temp = temp->next;
     }
 
@@ -52,12 +164,34 @@ void insertAtBeginning(Node **head, int e)
     *head = new;
 }
 
-void removeFirstNode()
+void removeFirstNode(Node **head)
 {
+
+    if (*head == NULL)
+    {
+        return;
+    }
+
+    Node *temp = *head;
+    *head = (*head)->next;
+    free(temp);
 }
 
-void removeAtMiddle()
+void removeAtMiddle(Node *head, int pos)
 {
+    if (head == NULL)
+        return;
+
+    Node *temp = head;
+
+    for (int i = 0; i < pos - 1 && temp->next != NULL; i++)
+    {
+        temp = temp->next;
+    }
+
+    Node *temp2 = temp->next;
+    temp->next = temp->next->next;
+    free(temp2);
 }
 
 void removeLastNode(Node *head)
@@ -87,21 +221,4 @@ void display(Node *head)
         printf("%d\t", temp->element);
         temp = temp->next;
     }
-}
-
-int main()
-{
-
-    Node *head = createNode(1);
-
-    for (int i = 0; i < 5; i++)
-    {
-        int x;
-        scanf("%d", &x);
-        insertAtEnd(head, x);
-    }
-
-    display(head);
-
-    return 0;
 }
